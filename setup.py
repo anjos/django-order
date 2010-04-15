@@ -17,6 +17,8 @@ setup(
     # we also need all translation files and templates
     package_data = {
       'order': [
+        'locale/*/LC_MESSAGES/django.po',
+        'locale/*/LC_MESSAGES/django.mo',
         ],
       },
 
