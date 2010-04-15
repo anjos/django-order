@@ -6,22 +6,17 @@
 """Adminstrative models for our DB entries
 """
 
-from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.util import unquote
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.functional import update_wrapper
 from django.utils.translation import ugettext, ugettext_lazy
+from django.conf import settings
 
 class OrderedModelAdmin(admin.ModelAdmin):
 
   ordering = ['order',]
-
-  class Media:
-    css = {
-        "all": ("order/css/style.css",)
-    }
 
   def get_urls(self):
     from django.conf.urls.defaults import patterns, url
@@ -48,11 +43,11 @@ class OrderedModelAdmin(admin.ModelAdmin):
     return HttpResponseRedirect('../../')
   
   def move_up_down_links(self, obj):
-    return '<span class="arrow-up"><a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-up/"title="%(up)s"><img src="%(ADMIN_MEDIA_PREFIX)simg/admin/arrow-up.gif" alt="%(up)s" /></a></span> <span class="arrow-down"><a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-down/" title="%(down)s"><img src="%(ADMIN_MEDIA_PREFIX)simg/admin/arrow-down.gif" alt="%(down)s" /></a></span>' % {
+    return '<a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-up/"title="%(up)s"><img width="16" height="16" src="%(MEDIA_URL)sorder/img/go-up.png" alt="%(up)s" /></a><nobr/><a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-down/" title="%(down)s"><img width="16" height="16" src="%(MEDIA_URL)sorder/img/go-down.png" alt="%(down)s" /></a>' % {
+        'MEDIA_URL': settings.MEDIA_URL,
         'app_label': self.model._meta.app_label,
         'module_name': self.model._meta.module_name,
         'object_id': obj.id,
-        'ADMIN_MEDIA_PREFIX': settings.ADMIN_MEDIA_PREFIX,
         'up': ugettext(u'Move up'),
         'down': ugettext(u'Move down'),
     }
