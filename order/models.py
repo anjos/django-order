@@ -1,4 +1,13 @@
+#!/usr/bin/env python
+# vim: set fileencoding=utf-8 :
+# Created by Andre Anjos <andre.dos.anjos@cern.ch>
+# Thu Apr 15 10:00:30 CEST 2010
+
+"""Models for our DB entries
+"""
+
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 class OrderedModel(models.Model):
     """
@@ -6,7 +15,7 @@ class OrderedModel(models.Model):
     Provides an ``order`` field.
     """
     
-    order = models.PositiveIntegerField(editable=False)
+    order = models.PositiveIntegerField(_(u'Order'), editable=False)
     
     class Meta:
         abstract = True

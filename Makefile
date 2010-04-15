@@ -7,7 +7,7 @@ LANGUAGES=en pt_BR fr es
 
 # These are helpers
 admin=sw/bin/django-admin.py
-project=$(shell basename `pwd`)
+project=order
 MAKE_MESSAGE=$(admin) makemessages --all --extension=html,py,txt
 COMPILE_MESSAGE=$(admin) compilemessages
 
