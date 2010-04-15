@@ -18,6 +18,11 @@ class OrderedModelAdmin(admin.ModelAdmin):
 
   ordering = ['order',]
 
+  class Media:
+    css = {
+        "all": ("order/css/style.css",)
+    }
+
   def get_urls(self):
     from django.conf.urls.defaults import patterns, url
     def wrap(view):
@@ -43,7 +48,7 @@ class OrderedModelAdmin(admin.ModelAdmin):
     return HttpResponseRedirect('../../')
   
   def move_up_down_links(self, obj):
-    return '<a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-up/"title="%(up)s"><img src="%(ADMIN_MEDIA_PREFIX)simg/admin/arrow-up.gif" alt="%(up)s" /></a> <a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-down/" title="%(down)s"><img src="%(ADMIN_MEDIA_PREFIX)simg/admin/arrow-down.gif" alt="%(down)s" /></a>' % {
+    return '<span class="arrow-up"><a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-up/"title="%(up)s"><img src="%(ADMIN_MEDIA_PREFIX)simg/admin/arrow-up.gif" alt="%(up)s" /></a></span> <span class="arrow-down"><a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-down/" title="%(down)s"><img src="%(ADMIN_MEDIA_PREFIX)simg/admin/arrow-down.gif" alt="%(down)s" /></a></span>' % {
         'app_label': self.model._meta.app_label,
         'module_name': self.model._meta.module_name,
         'object_id': obj.id,

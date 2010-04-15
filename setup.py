@@ -11,12 +11,13 @@ from setuptools import setup, find_packages
 setup(
 
     name = 'django-order',
-    version = '0.1',
+    version = '0.1.1',
     packages = find_packages(),
 
     # we also need all translation files and templates
     package_data = {
       'order': [
+        'media/css/*.css',
         'locale/*/LC_MESSAGES/django.po',
         'locale/*/LC_MESSAGES/django.mo',
         ],
