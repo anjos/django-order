@@ -16,6 +16,8 @@ from django.utils.translation import ugettext, ugettext_lazy
 
 class OrderedModelAdmin(admin.ModelAdmin):
 
+  ordering = ['order',]
+
   def get_urls(self):
     from django.conf.urls.defaults import patterns, url
     def wrap(view):
