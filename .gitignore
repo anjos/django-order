@@ -1,0 +1,10 @@
+*~
+*.pyc
+sw*
+pip-log.txt
+*.sql3
+build/
+*.egg-info/
+scripts/bootstrap.py
+ez_setup.py
+*.swp
