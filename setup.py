@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 setup(
 
     name = 'django-order',
-    version = '0.1.5',
+    version = '0.1.6',
     packages = find_packages(),
 
     # we also need all translation files and templates

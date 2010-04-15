@@ -35,7 +35,7 @@ class OrderedModel(models.Model):
         if up:
             qs = qs.order_by('-order').filter(order__lt=self.order)
         else:
-            qs = qs.filter(order__gt=self.order)
+            qs = qs.order_by('order').filter(order__gt=self.order)
         try:
             replacement = qs[0]
         except IndexError:
