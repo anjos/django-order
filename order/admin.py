@@ -43,8 +43,8 @@ class OrderedModelAdmin(admin.ModelAdmin):
     return HttpResponseRedirect('../../')
   
   def move_up_down_links(self, obj):
-    return '<span style="white-space:nowrap;"><a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-up/"title="%(up)s"><img width="16" height="16" src="%(MEDIA_URL)sorder/img/go-up.png" alt="%(up)s" /></a> <a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-down/" title="%(down)s"><img width="16" height="16" src="%(MEDIA_URL)sorder/img/go-down.png" alt="%(down)s" /></a></span>' % {
-        'MEDIA_URL': settings.MEDIA_URL,
+    return '<span style="white-space:nowrap;"><a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-up/"title="%(up)s"><img width="16" height="16" src="%(STATIC_URL)sorder/img/go-up.png" alt="%(up)s" /></a> <a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-down/" title="%(down)s"><img width="16" height="16" src="%(STATIC_URL)sorder/img/go-down.png" alt="%(down)s" /></a></span>' % {
+        'STATIC_URL': settings.STATIC_URL,
         'app_label': self.model._meta.app_label,
         'module_name': self.model._meta.module_name,
         'object_id': obj.id,
