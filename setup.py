@@ -29,7 +29,7 @@ setup(
     zip_safe=False,
 
     install_requires = [
-      'Django>=1.1',
+      'django',
       'docutils',
       ],
 
