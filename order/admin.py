@@ -6,11 +6,12 @@
 """Adminstrative models for our DB entries
 """
 
+from functools import update_wrapper
+
 from django.contrib import admin
 from django.contrib.admin.util import unquote
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.utils.functional import update_wrapper
 from django.utils.translation import ugettext, ugettext_lazy
 from django.conf import settings
 
@@ -19,7 +20,8 @@ class OrderedModelAdmin(admin.ModelAdmin):
   ordering = ['order',]
 
   def get_urls(self):
-    from django.conf.urls.defaults import patterns, url
+    from django.conf.urls import patterns, url
+
     def wrap(view):
         def wrapper(*args, **kwargs):
             return self.admin_site.admin_view(view)(*args, **kwargs)
@@ -33,7 +35,7 @@ class OrderedModelAdmin(admin.ModelAdmin):
             wrap(self.move_view),
             name='%s_%s_move_down' % info),
     ) + super(OrderedModelAdmin, self).get_urls()
-      
+
   def move_view(self, request, object_id, direction):
     obj = get_object_or_404(self.model, pk=unquote(object_id))
     if direction == 'up':
@@ -41,7 +43,7 @@ class OrderedModelAdmin(admin.ModelAdmin):
     else:
         obj.move_down()
     return HttpResponseRedirect('../../')
-  
+
   def move_up_down_links(self, obj):
     return '<span style="white-space:nowrap;"><a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-up/"title="%(up)s"><img width="16" height="16" src="%(STATIC_URL)sorder/img/go-up.png" alt="%(up)s" /></a> <a href="../../%(app_label)s/%(module_name)s/%(object_id)s/move-down/" title="%(down)s"><img width="16" height="16" src="%(STATIC_URL)sorder/img/go-down.png" alt="%(down)s" /></a></span>' % {
         'STATIC_URL': settings.STATIC_URL,
@@ -53,4 +55,4 @@ class OrderedModelAdmin(admin.ModelAdmin):
     }
   move_up_down_links.allow_tags = True
   move_up_down_links.short_description = ugettext_lazy('Move')
-  
+
